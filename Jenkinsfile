@@ -1,12 +1,19 @@
-pipeline{
+pipeline {
   agent any
-  stages{
-    stage('Build'){
-      steps{
-        sh "echo 'yo'"
-      
+  stages {
+    stage('Build') {
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'echo \'yo\''
+          }
+        }
+        stage('') {
+          steps {
+            mail(subject: 'new mail', body: 'blablabla', to: 'toto@amadeus.com')
+          }
+        }
       }
     }
   }
-  
 }
